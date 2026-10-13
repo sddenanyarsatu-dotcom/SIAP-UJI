@@ -1,0 +1,533 @@
+
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>SIAP UJI - SD Negeri Denanyar 1</title>
+
+  <style>
+    * {
+      box-sizing: border-box;
+    }
+
+    body {
+      margin: 0;
+      font-family: Arial, sans-serif;
+      background: linear-gradient(135deg, #e8f5e9, #f5f9ff);
+      color: #173b2d;
+      min-height: 100vh;
+    }
+
+    header {
+      background: linear-gradient(120deg, #075b3c, #13845b);
+      color: white;
+      padding: 22px 16px;
+      text-align: center;
+    }
+
+    .logo {
+      width: 100px;
+      height: 100px;
+      object-fit: contain;
+      padding: 6px;
+      background: white;
+      border: 3px solid #f4c95d;
+      border-radius: 50%;
+    }
+
+    header h1 {
+      margin: 12px 0 5px;
+      font-size: 30px;
+      letter-spacing: 2px;
+    }
+
+    header p {
+      margin: 6px 0;
+      line-height: 1.5;
+    }
+
+    main {
+      max-width: 1050px;
+      margin: 28px auto;
+      padding: 0 16px;
+    }
+
+    .panel {
+      background: white;
+      border-radius: 18px;
+      padding: 28px;
+      box-shadow: 0 8px 25px rgba(0, 0, 0, 0.08);
+    }
+
+    #loginPanel {
+      max-width: 480px;
+      margin: 0 auto;
+    }
+
+    .login-logo {
+      display: block;
+      width: 85px;
+      height: 85px;
+      object-fit: contain;
+      margin: 0 auto 12px;
+    }
+
+    h2 {
+      color: #075b3c;
+      text-align: center;
+    }
+
+    .subtitle {
+      text-align: center;
+      color: #63766b;
+      line-height: 1.6;
+      margin-bottom: 25px;
+    }
+
+    label {
+      display: block;
+      margin: 16px 0 7px;
+      font-weight: bold;
+    }
+
+    input {
+      width: 100%;
+      padding: 13px;
+      border: 1px solid #cbdacf;
+      border-radius: 9px;
+      font-size: 16px;
+    }
+
+    input:focus {
+      outline: 2px solid #13845b;
+      border-color: transparent;
+    }
+
+    button {
+      cursor: pointer;
+      font-size: 15px;
+      font-weight: bold;
+      border: none;
+      border-radius: 9px;
+      padding: 13px 18px;
+    }
+
+    .btn-login {
+      width: 100%;
+      margin-top: 22px;
+      background: #087447;
+      color: white;
+    }
+
+    .btn-login:hover {
+      background: #075b3c;
+    }
+
+    #error {
+      color: #b42318;
+      background: #fff0ef;
+      border-radius: 8px;
+      padding: 12px;
+      margin-top: 15px;
+      display: none;
+    }
+
+    .petunjuk {
+      font-size: 13px;
+      color: #68796f;
+      line-height: 1.6;
+      margin-top: 20px;
+    }
+
+    .dashboard-head {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 15px;
+      flex-wrap: wrap;
+    }
+
+    .dashboard-head h2 {
+      text-align: left;
+      margin-bottom: 5px;
+    }
+
+    .nama-siswa {
+      background: #e8f5e9;
+      color: #075b3c;
+      padding: 10px 14px;
+      border-radius: 20px;
+      display: inline-block;
+      font-weight: bold;
+      margin-top: 8px;
+    }
+
+    .btn-logout {
+      background: #fce8e6;
+      color: #a12622;
+    }
+
+    .menu-grid {
+      display: grid;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      gap: 16px;
+      margin-top: 25px;
+    }
+
+    .menu-card {
+      border: 1px solid #dce9df;
+      border-radius: 14px;
+      padding: 20px;
+      background: #fff;
+      display: flex;
+      flex-direction: column;
+      min-height: 180px;
+      transition: 0.2s;
+    }
+
+    .menu-card:hover {
+      transform: translateY(-3px);
+      box-shadow: 0 7px 18px rgba(0, 80, 40, 0.10);
+      border-color: #8ac6a0;
+    }
+
+    .ikon {
+      font-size: 34px;
+      margin-bottom: 12px;
+    }
+
+    .menu-card h3 {
+      margin: 0 0 8px;
+      font-size: 17px;
+    }
+
+    .menu-card p {
+      color: #66766c;
+      font-size: 13px;
+      line-height: 1.5;
+      flex: 1;
+    }
+
+    .btn-mulai {
+      display: block;
+      text-decoration: none;
+      text-align: center;
+      color: white;
+      background: #087447;
+      padding: 11px;
+      border-radius: 8px;
+      font-size: 14px;
+      font-weight: bold;
+    }
+
+    .btn-mulai:hover {
+      background: #075b3c;
+    }
+
+    footer {
+      text-align: center;
+      padding: 20px;
+      color: #63766b;
+      font-size: 13px;
+      line-height: 1.6;
+    }
+
+    .hidden {
+      display: none !important;
+    }
+
+    @media (max-width: 750px) {
+      .menu-grid {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+      }
+
+      .panel {
+        padding: 20px;
+      }
+    }
+
+    @media (max-width: 480px) {
+      header h1 {
+        font-size: 25px;
+      }
+
+      .menu-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .dashboard-head {
+        align-items: flex-start;
+      }
+    }
+  </style>
+</head>
+
+<body>
+
+<header>
+  <img
+    class="logo"
+    src="https://upload.wikimedia.org/wikipedia/commons/4/49/Tut_Wuri_Handayani.png"
+    alt="Logo Tut Wuri Handayani"
+    onerror="this.style.display='none';"
+  >
+  <h1>SIAP UJI</h1>
+  <p>Sistem Interaktif Asesmen Pembelajaran untuk Uji Kompetensi</p>
+  <p><strong>SD NEGERI DENANYAR 1 · TANGEN</strong></p>
+</header>
+
+<main>
+
+  <!-- HALAMAN LOGIN -->
+  <section id="loginPanel" class="panel">
+    <img
+      class="login-logo"
+      src="https://upload.wikimedia.org/wikipedia/commons/4/49/Tut_Wuri_Handayani.png"
+      alt="Tut Wuri Handayani"
+      onerror="this.style.display='none';"
+    >
+
+    <h2>Selamat Datang!</h2>
+
+    <p class="subtitle">
+      Silakan masuk untuk mengakses<br>
+      menu ulangan digital kelas VI.
+    </p>
+
+    <form id="loginForm">
+      <label for="username">Username (Nama Lengkap)</label>
+      <input
+        type="text"
+        id="username"
+        list="daftarNama"
+        placeholder="Pilih atau ketik nama siswa"
+        autocomplete="username"
+        required
+      >
+
+      <datalist id="daftarNama"></datalist>
+
+      <label for="password">Password (NIPD)</label>
+      <input
+        type="password"
+        id="password"
+        placeholder="Masukkan NIPD"
+        inputmode="numeric"
+        autocomplete="current-password"
+        required
+      >
+
+      <button class="btn-login" type="submit">
+        MASUK KE SIAP UJI →
+      </button>
+
+      <div id="error" role="alert">
+        Nama atau NIPD salah. Silakan periksa kembali.
+      </div>
+    </form>
+
+    <p class="petunjuk">
+      <strong>Petunjuk:</strong><br>
+      1. Username menggunakan nama lengkap sesuai daftar siswa.<br>
+      2. Password menggunakan NIPD masing-masing.<br>
+      3. Setelah berhasil masuk, pilih mata pelajaran yang akan dikerjakan.
+    </p>
+  </section>
+
+  <!-- HALAMAN MENU ULANGAN -->
+  <section id="dashboardPanel" class="panel hidden">
+
+    <div class="dashboard-head">
+      <div>
+        <h2>Menu Ulangan</h2>
+        <p>Silakan pilih mata pelajaran.</p>
+        <div class="nama-siswa">
+          👤 <span id="namaAktif"></span>
+        </div>
+      </div>
+
+      <button class="btn-logout" id="logoutBtn" type="button">
+        Keluar
+      </button>
+    </div>
+
+    <div class="menu-grid" id="menuGrid"></div>
+
+    <p class="petunjuk">
+      Klik tombol "MULAI ULANGAN" untuk membuka halaman ujian.
+      Kerjakan setiap soal dengan teliti dan jujur.
+    </p>
+  </section>
+
+</main>
+
+<footer>
+  <strong>SIAP UJI — SD Negeri Denanyar 1</strong><br>
+  Sistem Interaktif Asesmen Pembelajaran untuk Uji Kompetensi
+</footer>
+
+<script>
+  // DATA AKUN SISWA
+  const siswa = [
+    ["ABID ALVARO GAVRIEL", "2759"],
+    ["AFFIN CHARLISA ACHYARNIS", "2760"],
+    ["ALBY FAREL AXEL FAIRUS", "2761"],
+    ["ANGGRAITA DARA KUSUMANINGRUM", "2762"],
+    ["ARGA ADAM ALFATIR", "2763"],
+    ["ARIF AZHARI SETIAWAN", "2764"],
+    ["AZIZ SATRIO PRAMBUDI", "2765"],
+    ["AZKA KHOIRUNNISA", "2766"],
+    ["BILQIS ZAHIRA ALYA AZIZA", "2820"],
+    ["DANIEL IRKHAM YUNIANTO", "2767"],
+    ["DELTA DANIES WICAKSONO", "2768"],
+    ["ELVINA NOVITA SARI", "2769"],
+    ["FATIN DESTIANA SHIDQIA", "2770"],
+    ["IAN THU ALFIAN", "2771"],
+    ["KHALISA ZAHRA RAMADHANI", "2772"],
+    ["LABIBAH ANINDYA JIHAN TALITA ULFA", "2774"],
+    ["MAYDA NURUL AZKIA", "2775"],
+    ["MUHAMMAD AMIRRUDIN", "2776"],
+    ["MUHAMMAD EZA HAFIZ ADITIYA", "2777"],
+    ["MUHAMMAD RIFKY CAHYO SAPUTRO", "2778"],
+    ["NURIYA JANNATUN NAIM", "2779"],
+    ["PRABU AHMAD AHNAFI", "2780"],
+    ["QEYLA ABSHARI FIRDA RAHMADANI", "2848"],
+    ["RAHMAT MAULANA", "2781"],
+    ["RAVA'EL DWI VANDIMAS", "2782"],
+    ["RAVE'AL DIMAS PRAYOGA", "2783"],
+    ["RISMACERLYN NUR ISKANDAR", "2784"],
+    ["SAMUEL DESWA ANGGARA", "2785"],
+    ["VAHDIL ASKA HARIANSYAH", "2824"]
+  ];
+
+  // DAFTAR MENU DAN TAUTAN ULANGAN
+  const mapel = [
+    {
+      nama: "Pendidikan Pancasila",
+      ikon: "🇮🇩",
+      url: "https://sddenanyarsatu-dotcom.github.io/ULANGANPANCASILA/"
+    },
+    {
+      nama: "Pendidikan Agama Islam",
+      ikon: "🕌",
+      url: "https://sddenanyarsatu-dotcom.github.io/ULANGANPAI/"
+    },
+    {
+      nama: "Bahasa Indonesia",
+      ikon: "📚",
+      url: "https://sddenanyarsatu-dotcom.github.io/ULANGAN-B.INDO1/"
+    },
+    {
+      nama: "Bahasa Inggris",
+      ikon: "🌍",
+      url: "https://sddenanyarsatu-dotcom.github.io/ULANGANBAHASAINGGRIS/"
+    },
+    {
+      nama: "IPAS",
+      ikon: "🔬",
+      url: "https://sddenanyarsatu-dotcom.github.io/ULANGANIPAS/"
+    },
+    {
+      nama: "Seni Rupa",
+      ikon: "🎨",
+      url: "https://sddenanyarsatu-dotcom.github.io/ULANGANSENIRUPA/"
+    },
+    {
+      nama: "Matematika",
+      ikon: "➗",
+      url: "https://sddenanyarsatu-dotcom.github.io/ULANGANMATEMATIKA1/"
+    },
+    {
+      nama: "Bahasa Jawa",
+      ikon: "🌺",
+      url: "https://sddenanyarsatu-dotcom.github.io/ULANGANBAHASAJAWA/"
+    },
+    {
+      nama: "PJOK",
+      ikon: "⚽",
+      url: "https://sddenanyarsatu-dotcom.github.io/ULANGANPJOK/"
+    }
+  ];
+
+  // TAMPILKAN DAFTAR NAMA PADA PILIHAN LOGIN
+  const daftarNama = document.getElementById("daftarNama");
+
+  siswa.forEach(function(data) {
+    const pilihan = document.createElement("option");
+    pilihan.value = data[0];
+    daftarNama.appendChild(pilihan);
+  });
+
+  // BUAT KARTU MENU ULANGAN
+  const menuGrid = document.getElementById("menuGrid");
+
+  mapel.forEach(function(item) {
+    const kartu = document.createElement("article");
+    kartu.className = "menu-card";
+
+    const ikon = document.createElement("div");
+    ikon.className = "ikon";
+    ikon.textContent = item.ikon;
+
+    const judul = document.createElement("h3");
+    judul.textContent = item.nama;
+
+    const deskripsi = document.createElement("p");
+    deskripsi.textContent = "Ulangan " + item.nama + ".";
+
+    const tautan = document.createElement("a");
+    tautan.className = "btn-mulai";
+    tautan.href = item.url;
+    tautan.target = "_blank";
+    tautan.rel = "noopener noreferrer";
+    tautan.textContent = "MULAI ULANGAN ↗";
+
+    kartu.append(ikon, judul, deskripsi, tautan);
+    menuGrid.appendChild(kartu);
+  });
+
+  // PROSES LOGIN
+  document.getElementById("loginForm").addEventListener("submit", function(e) {
+    e.preventDefault();
+
+    const nama = document.getElementById("username")
+      .value.trim()
+      .replace(/\s+/g, " ")
+      .toLocaleUpperCase("id-ID");
+
+    const nipd = document.getElementById("password").value.trim();
+
+    const akun = siswa.find(function(data) {
+      return data[0].toLocaleUpperCase("id-ID") === nama
+        && data[1] === nipd;
+    });
+
+    const pesanError = document.getElementById("error");
+
+    if (!akun) {
+      pesanError.style.display = "block";
+      return;
+    }
+
+    pesanError.style.display = "none";
+    document.getElementById("namaAktif").textContent = akun[0];
+    document.getElementById("loginPanel").classList.add("hidden");
+    document.getElementById("dashboardPanel").classList.remove("hidden");
+    document.getElementById("password").value = "";
+    window.scrollTo({ top: 0, behavior: "smooth" });
+  });
+
+  // KELUAR DARI DASHBOARD
+  document.getElementById("logoutBtn").addEventListener("click", function() {
+    document.getElementById("dashboardPanel").classList.add("hidden");
+    document.getElementById("loginPanel").classList.remove("hidden");
+    document.getElementById("username").value = "";
+    document.getElementById("password").value = "";
+    document.getElementById("error").style.display = "none";
+    window.scrollTo({ top: 0, behavior: "smooth" });
+  });
+</script>
+
+</body>
+</html>
